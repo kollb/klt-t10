@@ -1,24 +1,22 @@
 package bridge;
 
+import state.IButtonState;
 import main.IMicrowave;
 
-public class MicrowaveButton extends ButtonControl {
-    private boolean currentState;
-    private boolean state;
+public class MicroWaveButton extends ButtonControl {
+    private IMicrowave microwave;
+    IButtonState state;
 
-    public MicrowaveButton(IMicrowave microwave) {
-        super(microwave);
+    public MicroWaveButton(IMicrowave microwave) {
+        this.microwave = microwave;
     }
 
-    public void setButtonControl(boolean state){
-        this.currentState = state;
+    public void click() {
+        this.state=microwave.getState();
+        state.click(microwave);
     }
 
-    public void pressButton(){
-        if (currentState) setButtonControl(false);
-            else setButtonControl(true);
+    public void setState(IButtonState state) {
+        microwave.setState(state);
     }
-
-
-
 }
